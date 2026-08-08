@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hanson Dissolution Masterclass 2026 — Registration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #cda144;
+    --accent-soft: #e6c878;
+    --navy: #0a1930;
+    --navy-light: #16304f;
+    --bg: #eef1f6;
+    --card: #ffffff;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --error: #dc2626;
+    --success: #16a34a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Manrope', 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 0 0 60px;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 0 16px; }
+  .banner {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    padding: 32px 16px 44px;
+    margin-bottom: -24px;
+  }
+  .logo-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 1px;
+    flex-wrap: wrap;
+  }
+  .logo-chip {
+    background: transparent;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo-chip img { height: 36px; width: auto; max-width: 140px; object-fit: contain; display: block; filter: brightness(0) invert(1); }
+  .logo-chip--lg img { height: 72px; max-width: 260px; }
+  .logo-divider { width: 1px; height: 30px; background: rgba(255,255,255,0.25); }
+  .header { text-align: center; margin-bottom: 0; font-family: 'Manrope', 'Segoe UI', system-ui, sans-serif; }
+  .header h1 {
+    margin: 0 0 3px;
+    font-size: 26px;
+    line-height: 1.2;
+    color: var(--accent-soft);
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    font-weight: 800;
+  }
+  .header .subtitle {
+    color: #f5f7fb;
+    font-size: 17px;
+    font-weight: 700;
+    font-style: italic;
+    margin: 0 0 3px;
+    line-height: 1.3;
+  }
+  .header .address-line { color: #f1f4fa; font-size: 15px; font-weight: 700; line-height: 1.3; margin: 0 0 3px; }
+  .header .datetime-line { color: #f1f4fa; font-size: 15px; font-weight: 700; letter-spacing: .01em; margin: 0; line-height: 1.3; }
+  .header .datetime-line .sep { color: #f1f4fa; margin: 0 8px; font-weight: 500; }
+  .footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12.5px;
+    margin-top: 28px;
+    font-family: 'Manrope', 'Segoe UI', system-ui, sans-serif;
+    letter-spacing: .02em;
+    line-height: 1.7;
+  }
+  .footer .tagline { font-style: italic; color: #8b95a3; }
+  .footer strong { color: var(--navy); }
+  .card {
+    background: var(--card); border-radius: 14px;
+    box-shadow: 0 16px 40px rgba(11, 31, 58, 0.18); padding: 32px;
+    position: relative; z-index: 2;
+    font-family: 'Manrope', 'Segoe UI', system-ui, sans-serif;
+  }
+  .section-title {
+    font-size: 13px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .06em; color: var(--navy); margin: 28px 0 12px;
+    padding-bottom: 6px; border-bottom: 2px solid var(--accent); display: inline-block;
+  }
+  .section-title:first-child { margin-top: 0; }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+  .field { flex: 1 1 160px; }
+  label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+  label .opt { font-weight: 400; color: var(--muted); }
+  input[type=text], input[type=email], input[type=tel], select, textarea {
+    width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px;
+    font-size: 16px; font-family: inherit; background: #fafbfc;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none; border-color: var(--navy);
+    box-shadow: 0 0 0 3px rgba(11,31,58,0.1); background: #fff;
+  }
+  textarea { resize: vertical; min-height: 70px; }
+  .consent {
+    background: #f8fafc; border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 16px; font-size: 13px; color: var(--muted); margin-top: 6px;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .consent input { width: auto; margin-top: 3px; }
+  button.submit {
+    width: 100%; margin-top: 24px; padding: 14px; border: none; border-radius: 8px;
+    background: var(--navy); color: #fff; font-size: 15px; font-weight: 700;
+    letter-spacing: .03em; cursor: pointer; transition: background .15s;
+    text-transform: uppercase;
+  }
+  button.submit:hover { background: var(--navy-light); }
+  button.submit:disabled { background: #9ca3af; cursor: not-allowed; }
+  .msg { display: none; margin-top: 16px; padding: 12px 14px; border-radius: 8px; font-size: 14px; }
+  .msg.error { display: block; background: #fef2f2; color: var(--error); border: 1px solid #fecaca; }
+  .msg.success { display: block; background: #f0fdf4; color: var(--success); border: 1px solid #bbf7d0; }
+  .req { color: var(--error); }
+
+  @media (max-width: 480px) {
+    .card { padding: 20px; border-radius: 14px; }
+    .row { flex-direction: column; gap: 14px; }
+    .field { flex: 1 1 100%; }
+    .header h1 { font-size: 20px; }
+    .logo-chip img { height: 30px; max-width: 110px; }
+    .banner { padding: 24px 12px 36px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <div class="wrap" style="padding:0;">
+    <div class="logo-bar" id="logoBar"></div>
+    <div class="header">
+      <h1 id="eventTitle">Hanson Dissolution Masterclass 2026</h1>
+      <div class="subtitle" id="eventSubtitle">Building Competency in Pharmaceutical Dissolution Testing</div>
+      <div class="address-line" id="eventAddress"></div>
+      <div class="datetime-line" id="eventDateTime"></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="card" id="formCard">
+    <form id="regForm">
+
+      <div class="section-title">Personal Information</div>
+      <div class="row">
+        <div class="field"><label>First Name <span class="req">*</span></label><input type="text" name="firstName" required></div>
+        <div class="field"><label>Middle Name <span class="opt">(optional)</span></label><input type="text" name="middleName"></div>
+        <div class="field"><label>Last Name <span class="req">*</span></label><input type="text" name="lastName" required></div>
+      </div>
+
+      <div class="section-title">Professional Details</div>
+      <div class="row">
+        <div class="field"><label>Institution <span class="req">*</span></label><input type="text" name="institution" required></div>
+        <div class="field">
+          <label>Position <span class="req">*</span></label>
+          <input type="text" name="position" placeholder="e.g. QC Analyst, Section Head" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>Profession Code <span class="req">*</span></label>
+          <select name="professionCode" id="professionCode" required>
+            <option value="">Select...</option>
+            <option value="Registered Chemist">Registered Chemist</option>
+            <option value="Registered Chemical Technician">Registered Chemical Technician</option>
+            <option value="Not Applicable">Not Applicable</option>
+          </select>
+        </div>
+        <div class="field" id="licenseField" style="display:none;">
+          <label>License Number <span class="opt">(if applicable)</span></label>
+          <input type="text" name="licenseNumber">
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>Category <span class="req">*</span></label>
+          <select name="category" id="category" required>
+            <option value="">Select...</option>
+            <option>Pharmaceuticals</option><option>Nutraceuticals</option><option>Research</option>
+            <option>Academy</option><option>Paints</option><option>Semi-conductors</option>
+            <option>Regulatory</option><option>Cosmetics</option><option>Mining</option><option>Others</option>
+          </select>
+        </div>
+        <div class="field" id="categorySpecifyField" style="display:none;">
+          <label>Please specify</label><input type="text" name="categorySpecify">
+        </div>
+      </div>
+
+      <div class="section-title">Contact Information</div>
+      <div class="row">
+        <div class="field"><label>Contact Number <span class="req">*</span></label><input type="tel" name="contactNumber" required></div>
+        <div class="field"><label>Email Address <span class="req">*</span></label><input type="email" name="email" required></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>Address <span class="req">*</span></label><input type="text" name="address" required></div>
+        <div class="field" style="flex:0 0 140px;"><label>Zipcode <span class="req">*</span></label><input type="text" name="zipcode" required></div>
+      </div>
+
+      <div class="section-title">Other</div>
+      <div class="row">
+        <div class="field">
+          <label>Food Restrictions <span class="opt">(optional)</span></label>
+          <textarea name="foodRestrictions" placeholder="e.g. vegetarian, allergies, halal..."></textarea>
+        </div>
+      </div>
+
+      <div class="consent">
+        <input type="checkbox" id="consent" name="consent" required>
+        <label for="consent" style="margin:0; font-weight:400;">
+          I consent to being photographed and/or video recorded during this event, and I grant
+          <span id="orgLabelInline">RainPhil Inc.</span> permission to use such photos/videos for
+          promotional and documentation purposes. <span class="req">*</span>
+        </label>
+      </div>
+
+      <button type="submit" class="submit" id="submitBtn">Submit Registration</button>
+      <div class="msg" id="formMsg"></div>
+    </form>
+  </div>
+  <div class="footer">
+    <div class="tagline">RainLab. Building Connections. Driving Discoveries.</div>
+    <div>Presented by <strong>RainPhil.com</strong></div>
+  </div>
+</div>
+
+<script>
+const EVENT_CONFIG = {
+  eventCode: "HANSONWORKSHOP2026",
+  eventName: "Hanson Dissolution Masterclass 2026",
+  eventSubtitle: "Building Competency in Pharmaceutical Dissolution Testing",
+  eventDateDisplay: "18 August 2026",
+  eventTimeDisplay: "9:00 AM to 4:00 PM",
+  venue: "Olivares cor. Arellano Sts, Palanan, Makati City",
+  orgName: "RainPhil Inc.",
+  // Direct image URL for your own logo. If you're hosting this HTML file on
+  // GitHub Pages alongside a /logos folder, a relative path like
+  // "logos/rainphil-logo.png" works too — see the setup notes below.
+  logoUrl: "https://rainphil.com/images/rainphil-logo.png",
+  partnerLogos: [
+    "https://www.abadinusa.co.id/_next/image?url=https%3A%2F%2Fabadinusa.s3.ap-southeast-1.amazonaws.com%2Fabn_website%2Fgeneral%2Fhanson_logo.png&w=750&q=75"
+    // add more partner logo URLs here as extra items in this list, comma-separated
+  ],
+  webAppUrl: "https://script.google.com/macros/s/AKfycbx0fOMWlJnimqhbFo6DTeWFYQr1qUT4NfIqRiIClBCmuPuxLN-Xx7O0wQNwlg8XNe5V/exec"
+};
+
+document.getElementById("orgLabelInline").textContent = EVENT_CONFIG.orgName;
+document.getElementById("eventTitle").textContent = EVENT_CONFIG.eventName;
+document.getElementById("eventSubtitle").textContent = EVENT_CONFIG.eventSubtitle;
+document.getElementById("eventAddress").textContent = EVENT_CONFIG.venue;
+document.getElementById("eventDateTime").innerHTML =
+  EVENT_CONFIG.eventDateDisplay + ' <span class="sep">|</span> ' + EVENT_CONFIG.eventTimeDisplay;
+
+// Build logo bar: company logo, then a divider, then each partner logo — all in white chips
+(function renderLogos() {
+  const bar = document.getElementById("logoBar");
+  const allLogos = [];
+  if (EVENT_CONFIG.logoUrl) allLogos.push(EVENT_CONFIG.logoUrl);
+  const partners = (EVENT_CONFIG.partnerLogos || []).filter(Boolean);
+
+  if (allLogos.length && partners.length) {
+    // Partner logos render bigger than your own logo — swap the `true`
+    // back to the line above (and remove it here) if you want your own
+    // logo to be the big one instead.
+    allLogos.forEach(url => bar.appendChild(makeChip(url)));
+    const div = document.createElement("div");
+    div.className = "logo-divider";
+    bar.appendChild(div);
+    partners.forEach(url => bar.appendChild(makeChip(url, true)));
+  } else {
+    allLogos.concat(partners).forEach(url => bar.appendChild(makeChip(url)));
+  }
+
+  function makeChip(url, large) {
+    const chip = document.createElement("div");
+    chip.className = "logo-chip" + (large ? " logo-chip--lg" : "");
+    const img = document.createElement("img");
+    img.src = url;
+    img.alt = "logo";
+    chip.appendChild(img);
+    return chip;
+  }
+})();
+
+document.getElementById("category").addEventListener("change", function () {
+  document.getElementById("categorySpecifyField").style.display = (this.value === "Others") ? "block" : "none";
+});
+
+document.getElementById("professionCode").addEventListener("change", function () {
+  document.getElementById("licenseField").style.display =
+    (this.value === "Registered Chemist" || this.value === "Registered Chemical Technician") ? "block" : "none";
+});
+
+const form = document.getElementById("regForm");
+const msg = document.getElementById("formMsg");
+const submitBtn = document.getElementById("submitBtn");
+
+form.addEventListener("submit", async function (evt) {
+  evt.preventDefault();
+  msg.className = "msg"; msg.textContent = "";
+  const fd = new FormData(form);
+  const payload = { eventCode: EVENT_CONFIG.eventCode };
+  fd.forEach((value, key) => payload[key] = value);
+  payload.consent = document.getElementById("consent").checked;
+
+  submitBtn.disabled = true; submitBtn.textContent = "Submitting...";
+  try {
+    const res = await fetch(EVENT_CONFIG.webAppUrl, { method: "POST", body: JSON.stringify(payload) });
+    const result = await res.json();
+    if (result.ok) {
+      form.style.display = "none";
+      msg.className = "msg success";
+      msg.textContent = "Thank you! We've received your registration (ID: " + result.registrationId + "). You'll get an email once it's been reviewed.";
+    } else {
+      msg.className = "msg error"; msg.textContent = result.error || "Something went wrong. Please try again.";
+      submitBtn.disabled = false; submitBtn.textContent = "Submit Registration";
+    }
+  } catch (err) {
+    msg.className = "msg error"; msg.textContent = "Network error — please check your connection and try again.";
+    submitBtn.disabled = false; submitBtn.textContent = "Submit Registration";
+  }
+});
+</script>
+</body>
+</html>
