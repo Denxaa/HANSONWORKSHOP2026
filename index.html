@@ -126,8 +126,32 @@
   button.submit:disabled { background: #9ca3af; cursor: not-allowed; }
   .msg { display: none; margin-top: 16px; padding: 12px 14px; border-radius: 8px; font-size: 14px; }
   .msg.error { display: block; background: #fef2f2; color: var(--error); border: 1px solid #fecaca; }
-  .msg.success { display: block; background: #f0fdf4; color: var(--success); border: 1px solid #bbf7d0; }
   .req { color: var(--error); }
+
+  /* Success screen shown in place of the form after a successful submit */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 20px 8px 8px;
+  }
+  .success-screen.show { display: block; }
+  .success-icon {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: #f0fdf4; border: 2px solid var(--success);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 18px;
+  }
+  .success-icon svg { width: 30px; height: 30px; }
+  .success-screen h2 {
+    margin: 0 0 10px; font-size: 21px; color: var(--navy); font-weight: 800;
+  }
+  .success-screen p { margin: 0 0 6px; color: var(--text); font-size: 15px; line-height: 1.6; }
+  .success-screen .reg-id {
+    display: inline-block; margin-top: 14px; padding: 8px 16px;
+    background: #f8fafc; border: 1px solid var(--border); border-radius: 8px;
+    font-size: 13px; color: var(--muted); letter-spacing: .02em;
+  }
+  .success-screen .reg-id strong { color: var(--navy); font-family: monospace; font-size: 13px; }
 
   @media (max-width: 480px) {
     .card { padding: 20px; border-radius: 14px; }
@@ -232,6 +256,18 @@
       <button type="submit" class="submit" id="submitBtn">Submit Registration</button>
       <div class="msg" id="formMsg"></div>
     </form>
+
+    <div class="success-screen" id="successScreen">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 13l4 4L19 7" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2>Registration Received!</h2>
+      <p id="successName"></p>
+      <p>You'll receive a confirmation email shortly, and another once your registration has been reviewed.</p>
+      <div class="reg-id">Reference ID: <strong id="successRegId"></strong></div>
+    </div>
   </div>
   <div class="footer">
     <div class="tagline">RainLab. Building Connections. Driving Discoveries.</div>
@@ -274,9 +310,6 @@ document.getElementById("eventDateTime").innerHTML =
   const partners = (EVENT_CONFIG.partnerLogos || []).filter(Boolean);
 
   if (allLogos.length && partners.length) {
-    // Partner logos render bigger than your own logo — swap the `true`
-    // back to the line above (and remove it here) if you want your own
-    // logo to be the big one instead.
     allLogos.forEach(url => bar.appendChild(makeChip(url)));
     const div = document.createElement("div");
     div.className = "logo-divider";
@@ -309,6 +342,7 @@ document.getElementById("professionCode").addEventListener("change", function ()
 const form = document.getElementById("regForm");
 const msg = document.getElementById("formMsg");
 const submitBtn = document.getElementById("submitBtn");
+const successScreen = document.getElementById("successScreen");
 
 form.addEventListener("submit", async function (evt) {
   evt.preventDefault();
@@ -323,9 +357,12 @@ form.addEventListener("submit", async function (evt) {
     const res = await fetch(EVENT_CONFIG.webAppUrl, { method: "POST", body: JSON.stringify(payload) });
     const result = await res.json();
     if (result.ok) {
+      document.getElementById("successName").textContent =
+        "Thanks, " + payload.firstName + " — your registration for " + EVENT_CONFIG.eventName + " has been received.";
+      document.getElementById("successRegId").textContent = result.registrationId;
       form.style.display = "none";
-      msg.className = "msg success";
-      msg.textContent = "Thank you! We've received your registration (ID: " + result.registrationId + "). You'll get an email once it's been reviewed.";
+      successScreen.classList.add("show");
+      successScreen.scrollIntoView({ behavior: "smooth", block: "start" });
     } else {
       msg.className = "msg error"; msg.textContent = result.error || "Something went wrong. Please try again.";
       submitBtn.disabled = false; submitBtn.textContent = "Submit Registration";
