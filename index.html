@@ -355,7 +355,18 @@ form.addEventListener("submit", async function (evt) {
   submitBtn.disabled = true; submitBtn.textContent = "Submitting...";
   try {
     const res = await fetch(EVENT_CONFIG.webAppUrl, { method: "POST", body: JSON.stringify(payload) });
-    const result = await res.json();
+    const rawText = await res.text();
+    console.log("[registration] HTTP status:", res.status);
+    console.log("[registration] raw server response:", rawText);
+
+    let result;
+    try {
+      result = JSON.parse(rawText);
+    } catch (parseErr) {
+      console.error("[registration] response was not valid JSON:", parseErr);
+      throw new Error("The server returned an unexpected response. Open the browser console (F12) for details.");
+    }
+
     if (result.ok) {
       document.getElementById("successName").textContent =
         "Thanks, " + payload.firstName + " — your registration for " + EVENT_CONFIG.eventName + " has been received.";
@@ -368,7 +379,9 @@ form.addEventListener("submit", async function (evt) {
       submitBtn.disabled = false; submitBtn.textContent = "Submit Registration";
     }
   } catch (err) {
-    msg.className = "msg error"; msg.textContent = "Network error — please check your connection and try again.";
+    console.error("[registration] submit failed:", err);
+    msg.className = "msg error";
+    msg.textContent = "Something went wrong: " + err.message + ". Please try again, or contact us directly if it persists.";
     submitBtn.disabled = false; submitBtn.textContent = "Submit Registration";
   }
 });
