@@ -214,6 +214,7 @@
         </div>
         <label>Product Area(s) of Interest <span class="req">*</span> <span class="opt">(select all that apply)</span></label>
         <div class="checkbox-group" id="f_productAreaGroup"></div>
+        <input type="text" id="f_productAreaOther" placeholder="Please specify" style="display:none; margin-top:8px;">
 
         <div class="row" style="margin-top:14px;">
           <div class="field">
@@ -418,6 +419,20 @@ function buildStaticOptions() {
   document.getElementById("f_productAreaGroup").innerHTML = opts.productAreas.map(pa => `
     <label><input type="checkbox" name="productArea" value="${escapeHtml(pa)}"> ${escapeHtml(pa)}</label>
   `).join("");
+  // If the event's product area list includes an "Others" option (however
+  // it's capitalized — set per-event via the Events sheet's
+  // FeedbackProductAreas column, or in the default list), checking it
+  // reveals a free-text field so they can specify what it is.
+  const otherCheckbox = Array.from(document.querySelectorAll('#f_productAreaGroup input[type="checkbox"]')).find(el => /^others?$/i.test(el.value.trim()));
+  const otherInput = document.getElementById("f_productAreaOther");
+  if (otherCheckbox) {
+    otherCheckbox.addEventListener("change", function () {
+      otherInput.style.display = this.checked ? "block" : "none";
+      if (!this.checked) otherInput.value = "";
+    });
+  } else {
+    otherInput.style.display = "none";
+  }
 
   document.getElementById("f_contactPreferenceGroup").innerHTML = opts.contactPreferences.map(cp => `
     <label><input type="radio" name="contactPreference" value="${escapeHtml(cp)}"> ${escapeHtml(cp)}</label>
@@ -549,6 +564,14 @@ document.getElementById("submitBtn").addEventListener("click", async function ()
   const category = usingManual ? document.getElementById("m_category").value.trim() : (selectedMatch && selectedMatch.category);
 
   const productAreas = Array.from(document.querySelectorAll('input[name="productArea"]:checked')).map(el => el.value);
+  // If "Others" was checked, replace the bare word with "Others: <what they
+  // typed>" so the actual specification is what gets stored — not just the
+  // word "Others" on its own.
+  const otherIdx = productAreas.findIndex(v => /^others?$/i.test(v.trim()));
+  if (otherIdx !== -1) {
+    const otherText = document.getElementById("f_productAreaOther").value.trim();
+    if (otherText) productAreas[otherIdx] = `Others: ${otherText}`;
+  }
   const contactPreferenceEl = document.querySelector('input[name="contactPreference"]:checked');
 
   const payload = {
